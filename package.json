@@ -1,5 +1,5 @@
 {
-  "name": "Rent-Car-In-Ukraine",
+  "name": "rent-car-in-ukraine",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://Olga-Olga.github.io/Rent-Car-In-Ukraine/",
@@ -36,5 +36,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "Rent-Car-In-Ukraine (mock API, React, JS)",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
