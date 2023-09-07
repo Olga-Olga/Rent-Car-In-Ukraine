@@ -1,20 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Modal } from './Modal';
 import { Route, Routes } from 'react-router-dom';
-import NotFound from './pages/NotFound';
+import NotFound from './pages/NotFound/NotFound';
 import { Layout } from './Layout';
-import { Home } from './pages/Home';
-import { Catalog } from './pages/Catalog';
-import { Favorites } from './pages/Favorites';
+import { Home } from './pages/Home/Home';
+import { Catalog } from './pages/Catalog/Catalog';
+import { Favorites } from './pages/Favorites/Favorites';
 import { useDispatch } from 'react-redux';
 
 export const App = () => {
   const [carItem, setCarItem] = useState('');
-
-  const toggleModal = oneCar => {
-    // setCarItem(largeImageURL ? largeImageURL : '');
-    setCarItem(carItem);
-  };
 
   const dispatch = useDispatch();
   // useEffect(() => {
@@ -23,12 +18,6 @@ export const App = () => {
 
   return (
     <Routes>
-      {/* {largeImageURL && (
-        // <Modal onClose={toggleModal}>
-        <Modal onClose={() => toggleModal('')}>
-          <img className="modal" src={largeImageURL} alt="la-la-la" />
-        </Modal>
-      )} */}
       {/* <ImageGallery
         onModal={toggleModal}
         total={total}

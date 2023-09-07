@@ -1,66 +1,54 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import {
-  fetchCars,
-  fetchOneCar,
-  getCarThunk,
-  getOneCarThunk,
-} from './carOperations';
+import { getCarsThunk } from './carOperations';
 
 const carSlice = createSlice({
-  name: 'car',
+  name: 'cars',
   initialState: {
     cars: {
       items: [],
       isLoading: false,
       error: null,
     },
-    filter: '',
+    filter: { field1: 0, field2: 0, field3: 0 },
+    isOpenModal: false,
+    favoriteList: [],
   },
   reducers: {
     filterChanges: (state, { payload }) => {
       state.filter = payload;
       console.log(state.filter);
     },
+    filteredCar: (state, { payload }) => {
+      state.cars.items = state.cars.items.filter(car => car.id !== payload);
+    },
+    changeModalWindow: (state, { payload }) => {
+      state.isOpenModal = !state.isOpenModal;
+    },
+    addToFavoriteList: (state, { payload }) => {
+      state.cars.favoriteList.push(payload);
+    },
+    removeFromFavoriteList: (state, { payload }) => {
+      state.cars.favoriteList = state.cars.favoriteList.filter(
+        item => item.id !== payload
+      );
+    },
   },
+
   extraReducers: builder => {
     builder
-      .addCase(getCarThunk.fulfilled, (state, action) => {
-        // state.contacts.items = action.payload;
-        // state.contacts.isLoading = false;
+      .addCase(getCarsThunk.fulfilled, (state, action) => {
+        state.cars.items = action.payload;
+        state.cars.isLoading = false;
       })
-      // .addCase(getOneCarThunk.fulfilled, (state, { payload }) => {
-      //   // state.contacts.items = state.contacts.items.filter(
-      //   //   contact => contact.id !== payload
-      //   // );
-      // })
-      //   .addCase(addContacts.fulfilled, (state, { payload }) => {
-      //     state.contacts.items.push(payload);
-      //   })
-      //   .addCase(fetchContacts.rejected, (state, action) => {
-      //     state.contacts.isLoading = false;
-      //     state.error = action.payload;
-      //   })
-      .addMatcher(
-        isAnyOf(),
-        //   fetchContacts.fulfilled,
-        //   removeContacts.fulfilled,
-        //   addContacts.fulfilled
-        (state, action) => {
-          //   state.contacts.isLoading = false;
-        }
-      );
-    //   .addMatcher(
-    //     isAnyOf(
-    //       fetchContacts.pending,
-    //       removeContacts.pending,
-    //       addContacts.pending
-    //     ),
-    //     (state, action) => {
-    //       state.contacts.isLoading = true;
-    //     }
-    //   );
+      .addMatcher(isAnyOf(getCarsThunk.fulfilled), (state, action) => {
+        state.cars.isLoading = false;
+      })
+      .addMatcher(isAnyOf(getCarsThunk.pending), (state, action) => {
+        state.cars.isLoading = true;
+      });
   },
 });
 
 export const carReducer = carSlice.reducer;
-export const { filterChanges } = carSlice.actions;
+export const { filterChanges, addToFavoriteList, removeFromFavoriteList } =
+  carSlice.actions;
