@@ -10,7 +10,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <BrowserRouter>
   <BrowserRouter basename="/Rent-Car-In-Ukraine">
     <ThemeProvider theme={theme}>
       <Provider store={store}>
