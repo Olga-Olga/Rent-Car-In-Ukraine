@@ -1,5 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFavorite } from 'redux/car/carSelector';
+import {
+  selectCars,
+  selectCurrentPage,
+  selectFavorite,
+  selectItemOnPage,
+} from 'redux/car/carSelector';
 import {
   Favorite,
   NotFavorite,
@@ -11,17 +16,25 @@ import {
   StyledImgDiv,
   StyledItem,
   StyledLoadMoreBtn,
+  StyledLoadMoreLink,
   StyledOl,
   StyledTitleCard,
   StyledTitleFirstPart,
 } from '../Catalog/Catalog.styled';
-import { addToFavoriteList, removeFromFavoriteList } from 'redux/car/carSlice';
+import {
+  addToFavoriteList,
+  incrementPage,
+  removeFromFavoriteList,
+} from 'redux/car/carSlice';
 import { SpriteSVG } from 'components/assets/SpriteSVG';
+import { useState } from 'react';
+import { Modal } from 'components/Modal';
 
 export const Favorites = () => {
-  const favoriteList = useSelector(selectFavorite);
   const dispatch = useDispatch();
   const carsFavorite = useSelector(selectFavorite);
+  const currentPage = useSelector(selectCurrentPage);
+  const itemsOnPage = useSelector(selectItemOnPage);
   const toggleFavoriteList = car => {
     if (carsFavorite.some(item => car.id === item.id)) {
       dispatch(removeFromFavoriteList(car));
@@ -29,6 +42,26 @@ export const Favorites = () => {
       dispatch(addToFavoriteList(car));
     }
   };
+  const [selectedCar, setSelectedCar] = useState(null);
+  const onOpenModal = id => {
+    setSelectedCar(id);
+  };
+
+  const toggleModal = id => {
+    setSelectedCar(id ? id : '');
+    setSelectedCar(id);
+  };
+
+  const onPageUpload = () => {
+    dispatch(incrementPage());
+  };
+
+  const startIndex = (currentPage - 1) * itemsOnPage;
+  const endIndex = startIndex + itemsOnPage;
+  const carsFavoriteBlock = useSelector(selectFavorite).slice(0, endIndex);
+
+  const displayLoadMore =
+    carsFavoriteBlock.length < useSelector(selectFavorite).length;
 
   return (
     <StyledDiv>
@@ -36,7 +69,7 @@ export const Favorites = () => {
         <div>No any cars are in your favorite list</div>
       ) : null}
       <StyledOl>
-        {favoriteList.map(car => {
+        {carsFavoriteBlock.map(car => {
           return (
             <StyledItem key={car.id}>
               <StyledHart onClick={() => toggleFavoriteList(car)}>
@@ -76,11 +109,23 @@ export const Favorites = () => {
                 {car.type} | {car.model} | {car.id} |{' '}
                 {car.accessories[Math.floor(Math.random() * 3)]}
               </StyledCarDescription>
-              <StyledLoadMoreBtn>Learn More</StyledLoadMoreBtn>
+              <StyledLoadMoreBtn onClick={() => onOpenModal(car)}>
+                Learn More
+              </StyledLoadMoreBtn>
             </StyledItem>
           );
         })}
       </StyledOl>
+      {selectedCar && (
+        <Modal onClose={() => toggleModal(``)}>
+          <div>{selectedCar}</div>
+        </Modal>
+      )}
+      {displayLoadMore ? (
+        <StyledLoadMoreLink onClick={onPageUpload}>
+          Load More
+        </StyledLoadMoreLink>
+      ) : null}
     </StyledDiv>
   );
 };

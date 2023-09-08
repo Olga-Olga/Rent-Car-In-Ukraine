@@ -16,8 +16,6 @@ import {
   StyledCarDescription,
   StyledCarModel,
   StyledDiv,
-  // StyledDivLable,
-  // StyledFilterBlock,
   StyledHart,
   StyledImg,
   StyledImgDiv,
@@ -47,7 +45,6 @@ export const Catalog = () => {
 
   useEffect(() => {
     dispatch(getCarsThunk());
-    console.log(dispatch(getCarsThunk()));
   }, [dispatch]);
 
   const carsFavorite = useSelector(selectFavorite);
