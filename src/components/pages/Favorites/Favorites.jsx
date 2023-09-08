@@ -1,6 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-
-import { styled } from 'styled-components';
 // import { StyledDiv } from './Favorites.styled';
 import { selectFavorite } from 'redux/car/carSelector';
 import {
