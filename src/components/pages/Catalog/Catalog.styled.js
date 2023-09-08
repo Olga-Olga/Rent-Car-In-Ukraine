@@ -48,8 +48,7 @@ export const StyledImg = styled.img`
     rgba(18, 20, 23, 0) 41.07%
   );
   url(${props => props.$imageUrl}), lightgray 50% / cover no-repeat;
-  /* url(<>), lightgray 50% / cover no-repeat; */
-`;
+ `;
 
 export const StyledImgDiv = styled.div`
   height: 268px;

@@ -1,31 +1,29 @@
 import React from 'react';
+import {
+  StyledDiv,
+  NavLinkStyled,
+  StyledDivWrapper,
+  GradientOverlay,
+} from './Home.styled';
 import { NavLink } from 'react-router-dom';
-import { styled } from 'styled-components';
 
 export const Home = () => {
   return (
     <>
-      <StyledDiv>
-        <h1>
-          You want to be flexible and move whereever you want. We are open to
-          you. Rent car service has wide and{' '}
-        </h1>
-        <button>
-          <NavLinkStyled to="/catalog">Review Catalog here</NavLinkStyled>
-        </button>
-      </StyledDiv>
+      <StyledDivWrapper>
+        <StyledDiv>
+          "Are you yearning for ultimate flexibility and the freedom to explore
+          wherever your heart desires? Look no further! Our company is here to
+          make your dreams a reality. Rent a car from us and embark on your
+          unforgettable journey today."
+          <hr />
+          Ви прагнете максимальної гнучкості та свободи бути там, де забажає
+          ваше серце? Не шукайте далі! Наша компанія тут, щоб втілити ваші мрії
+          в реальність. Орендуйте у нас автомобіль і вирушайте у свою незабутню
+          подорож сьогодні.
+        </StyledDiv>
+        <NavLink to="/catalog">Click here to Review the Catalog</NavLink>
+      </StyledDivWrapper>
     </>
   );
 };
-
-const StyledDiv = styled.div`
-  flex: 1;
-  height: 1px;
-  background-color: grey;
-  margin-top: 20px;
-`;
-
-const NavLinkStyled = styled(NavLink)`
-  /* position: relative; */
-  display: flex;
-`;

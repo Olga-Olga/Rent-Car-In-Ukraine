@@ -1,12 +1,24 @@
-// export const StyledDiv = styled.div`
-//   padding: 20px 80px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// `;
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
-// export const StyledTitle = styled.h2`
-//   color: #6150f7;
-//   -webkit-text-stroke: 0.2px white;
-//   margin-bottom: 5px;
-// `;
+const StNavLink = styled(NavLink)`
+  display: flex;
+`;
+
+export const StyledDiv = styled.h3`
+  width: 400px;
+`;
+
+export const StyledDivWrapper = styled.div`
+  height: 100vh;
+  width: 100vw;
+  padding: 20px;
+  background-image: linear-gradient(
+      rgba(170, 170, 170, 0.7),
+      rgba(89, 90, 90, 0.7)
+    ),
+    url('https://www.hertz.com/content/dam/hertz/global/blog-articles/resources/car-rental-vs-car-sharing/car-keys.rendition.xlarge.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+`;
