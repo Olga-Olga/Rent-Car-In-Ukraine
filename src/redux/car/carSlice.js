@@ -12,6 +12,8 @@ const carSlice = createSlice({
     filter: { field1: 0, field2: 0, field3: 0 },
     isOpenModal: false,
     favoriteList: [],
+    currentPage: 1,
+    itemsOnPage: 8,
   },
   reducers: {
     filterChanges: (state, { payload }) => {
@@ -25,12 +27,15 @@ const carSlice = createSlice({
       state.isOpenModal = !state.isOpenModal;
     },
     addToFavoriteList: (state, { payload }) => {
-      state.cars.favoriteList.push(payload);
+      state.favoriteList.push(payload);
     },
     removeFromFavoriteList: (state, { payload }) => {
-      state.cars.favoriteList = state.cars.favoriteList.filter(
-        item => item.id !== payload
+      state.favoriteList = state.favoriteList.filter(
+        item => item.id !== payload.id
       );
+    },
+    incrementPage: (state, { payload }) => {
+      state.currentPage += 1;
     },
   },
 
@@ -50,5 +55,9 @@ const carSlice = createSlice({
 });
 
 export const carReducer = carSlice.reducer;
-export const { filterChanges, addToFavoriteList, removeFromFavoriteList } =
-  carSlice.actions;
+export const {
+  filterChanges,
+  addToFavoriteList,
+  removeFromFavoriteList,
+  incrementPage,
+} = carSlice.actions;

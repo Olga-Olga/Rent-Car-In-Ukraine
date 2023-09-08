@@ -1,23 +1,18 @@
-// import { ContactsForm } from 'components/ContactForm/ContactForm';
-// import ContactList from 'components/ContactList/ContactList';
-// import Filter from 'components/Filter/Filter';
 import { Modal } from 'components/Modal';
-import { useEffect } from 'react';
-// import { FcFilledFilter, FcSmartphoneTablet, FcTodoList } from 'react-icons/fc';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCarsThunk } from 'redux/car/carOperations';
+import { incrementPage } from 'redux/car/carSlice';
 import {
   selectCars,
+  selectCurrentPage,
   selectFavorite,
-  selectFavoriteCars,
+  selectItemOnPage,
 } from 'redux/car/carSelector';
 import { removeFromFavoriteList, addToFavoriteList } from 'redux/car/carSlice';
-// import { fetchContacts } from 'redux/Contacts/operations';
-// import { selectIsLoading } from 'redux/Contacts/selector';
-// import { fetchContacts } from 'redux/operations';
-// import { selectIsLoading } from 'redux/Auth/authSelector';
-import { styled } from 'styled-components';
 import {
+  Favorite,
+  NotFavorite,
   StyledCarDescription,
   StyledCarModel,
   StyledDiv,
@@ -25,6 +20,7 @@ import {
   StyledFilterBlock,
   StyledHart,
   StyledImg,
+  StyledImgDiv,
   StyledItem,
   StyledLoadMoreBtn,
   StyledLoadMoreLink,
@@ -37,20 +33,17 @@ import { SpriteSVG } from 'components/assets/SpriteSVG';
 
 export const Catalog = () => {
   const dispatch = useDispatch();
-  const carList = useSelector(selectCars);
-  // if (!carList.length) {
-  //   return;
-  // }
-  console.log('carList', carList);
+  const [selectedCar, setSelectedCar] = useState(null);
+  const currentPage = useSelector(selectCurrentPage);
+  const itemsOnPage = useSelector(selectItemOnPage);
+  const startIndex = (currentPage - 1) * itemsOnPage;
+  const endIndex = startIndex + itemsOnPage;
+  const carList = useSelector(selectCars).slice(0, endIndex);
+  const onPageUpload = () => {
+    dispatch(incrementPage());
+  };
 
-  // console.log(carsFavorite);
-  // const toggleModal = oneCar => {
-  // setCarItem(largeImageURL ? largeImageURL : '');
-  //   setCarItem(carItem);
-  // };
-  const uniquePrices = [...new Set(carList.map(car => car.rentalPrice))].sort(
-    (a, b) => b - a
-  );
+  const displayLoadMore = carList.length < useSelector(selectCars).length;
 
   useEffect(() => {
     dispatch(getCarsThunk());
@@ -58,7 +51,6 @@ export const Catalog = () => {
   }, [dispatch]);
 
   const carsFavorite = useSelector(selectFavorite);
-  console.log(carsFavorite);
   const toggleFavoriteList = car => {
     if (carsFavorite.some(item => car.id === item.id)) {
       dispatch(removeFromFavoriteList(car));
@@ -66,11 +58,23 @@ export const Catalog = () => {
       dispatch(addToFavoriteList(car));
     }
   };
+  // const uniquePrices = [...new Set(carList.map(car => car.rentalPrice))].sort(
+  //   (a, b) => b - a
+  // );
+
+  const onOpenModal = id => {
+    setSelectedCar(id);
+  };
+
+  const toggleModal = id => {
+    setSelectedCar(id ? id : '');
+    setSelectedCar(id);
+  };
 
   return (
     <StyledDiv>
       <StyledTitle>Catalog here</StyledTitle>
-      <StyledFilterBlock>
+      {/* <StyledFilterBlock>
         <StyledDivLable>
           <div>Car brand</div>
           <select>
@@ -112,20 +116,26 @@ export const Catalog = () => {
             </select>
           </div>
         </StyledDivLable>
-      </StyledFilterBlock>
+      </StyledFilterBlock> */}
       <StyledOl>
         {carList.map(car => {
-          // const carsFavorite = carsFavorite.some(item => item.id === car.id);
-
           return (
             <StyledItem key={car.id}>
-              <StyledHart
-                // carsFavorite={carsFavorite}
-                onClick={() => toggleFavoriteList(car)}
-              >
-                <SpriteSVG name="hart"></SpriteSVG>
+              <StyledHart onClick={() => toggleFavoriteList(car)}>
+                {carsFavorite.some(item => car.id === item.id) ? (
+                  <Favorite>
+                    <SpriteSVG name="hart" />
+                  </Favorite>
+                ) : (
+                  <NotFavorite>
+                    <SpriteSVG name="hart" />
+                  </NotFavorite>
+                )}
               </StyledHart>
-              <StyledImg src={car.img} alt={car.model} />
+              <StyledImgDiv>
+                {/* <StyledImg $imageUrl={car.img} alt={car.model} /> */}
+                <StyledImg src={car.img} alt={car.model} />
+              </StyledImgDiv>
               <StyledTitleCard>
                 <StyledTitleFirstPart>
                   {car.make}
@@ -149,18 +159,23 @@ export const Catalog = () => {
                 {car.type} | {car.model} | {car.id} |{' '}
                 {car.accessories[Math.floor(Math.random() * 3)]}
               </StyledCarDescription>
-              <StyledLoadMoreBtn>Load More</StyledLoadMoreBtn>
+              <StyledLoadMoreBtn onClick={() => onOpenModal(car)}>
+                Learn More
+              </StyledLoadMoreBtn>
             </StyledItem>
           );
         })}
       </StyledOl>
-      <StyledLoadMoreLink>Load More</StyledLoadMoreLink>
-
-      {/* {largeImageURL && (
-        <Modal onClose={() => toggleModal('')}>
-          <div>MODAL WINDOW</div>
+      {displayLoadMore ? (
+        <StyledLoadMoreLink onClick={onPageUpload}>
+          Load More
+        </StyledLoadMoreLink>
+      ) : null}
+      {selectedCar && (
+        <Modal onClose={() => toggleModal(``)}>
+          <div>{selectedCar}</div>
         </Modal>
-      )} */}
+      )}
     </StyledDiv>
   );
 };

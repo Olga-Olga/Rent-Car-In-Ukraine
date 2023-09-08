@@ -39,13 +39,22 @@ export const StyledItem = styled.li`
 
 export const StyledImg = styled.img`
   height: 268px;
+  width: 100%;
+  object-fit: fit;
   border-radius: 14px;
   background: linear-gradient(
-      180deg,
-      rgba(18, 20, 23, 0.5) 2.5%,
-      rgba(18, 20, 23, 0) 41.07%
-    ),
-    url(<path-to-image>), lightgray 50% / cover no-repeat;
+    180deg,
+    rgba(18, 20, 23, 0.5) 2.5%,
+    rgba(18, 20, 23, 0) 41.07%
+  );
+  url(${props => props.$imageUrl}), lightgray 50% / cover no-repeat;
+  /* url(<>), lightgray 50% / cover no-repeat; */
+`;
+
+export const StyledImgDiv = styled.div`
+  height: 268px;
+  width: 100%;
+  border-radius: 14px;
 `;
 
 export const StyledTitleCard = styled.div`
@@ -98,9 +107,12 @@ export const StyledLoadMoreBtn = styled.button`
   font-weight: 600;
   line-height: 1.42;
   border: 0;
+  &:hover {
+    background: #0b44cd;
+  }
 `;
 
-export const StyledLoadMoreLink = styled.a`
+export const StyledLoadMoreLink = styled.button`
   border: 0;
   color: #3470ff;
   font-size: 16px;
@@ -108,6 +120,9 @@ export const StyledLoadMoreLink = styled.a`
   line-height: 1.5;
   text-decoration-line: underline;
   background-color: white;
+  &:hover {
+    color: #0b44cd;
+  }
 `;
 
 export const StyledSelect = styled.select`
@@ -133,8 +148,16 @@ export const StyledHart = styled.div`
   position: absolute;
   width: 20px;
   height: 20px;
-  stroke: white;
-  fill: transparent;
   top: 14px;
   right: 14px;
+`;
+
+export const Favorite = styled.div`
+  fill: #9747ff;
+  stroke: #9747ff;
+`;
+
+export const NotFavorite = styled.div`
+  stroke: #ffffffcc;
+  fill: transparent;
 `;

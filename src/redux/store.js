@@ -16,7 +16,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['cars'],
+  whitelist: ['cars', 'favoriteList'],
 };
 
 // Create a persisted reducer

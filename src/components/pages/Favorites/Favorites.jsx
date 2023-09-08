@@ -1,52 +1,89 @@
-// import { ContactsForm } from 'components/ContactForm/ContactForm';
-// import ContactList from 'components/ContactList/ContactList';
-// import Filter from 'components/Filter/Filter';
-import { useEffect } from 'react';
-// import { FcFilledFilter, FcSmartphoneTablet, FcTodoList } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
-// import { fetchContacts } from 'redux/Contacts/operations';
-// import { selectIsLoading } from 'redux/Contacts/selector';
-// import { fetchContacts } from 'redux/operations';
-// import { selectIsLoading } from 'redux/Auth/authSelector';
+
 import { styled } from 'styled-components';
+// import { StyledDiv } from './Favorites.styled';
+import { selectFavorite } from 'redux/car/carSelector';
+import {
+  Favorite,
+  NotFavorite,
+  StyledCarDescription,
+  StyledCarModel,
+  StyledDiv,
+  StyledHart,
+  StyledImg,
+  StyledImgDiv,
+  StyledItem,
+  StyledLoadMoreBtn,
+  StyledOl,
+  StyledTitleCard,
+  StyledTitleFirstPart,
+} from '../Catalog/Catalog.styled';
+import { addToFavoriteList, removeFromFavoriteList } from 'redux/car/carSlice';
+import { SpriteSVG } from 'components/assets/SpriteSVG';
 
 export const Favorites = () => {
+  const favoriteList = useSelector(selectFavorite);
   const dispatch = useDispatch();
-  //   const load = useSelector(selectIsLoading);
-
-  //   useEffect(() => {
-  //     dispatch(fetchContacts());
-  //   }, [dispatch]);
+  const carsFavorite = useSelector(selectFavorite);
+  const toggleFavoriteList = car => {
+    if (carsFavorite.some(item => car.id === item.id)) {
+      dispatch(removeFromFavoriteList(car));
+    } else {
+      dispatch(addToFavoriteList(car));
+    }
+  };
 
   return (
     <StyledDiv>
-      <div>Favorite here</div>
-      {/* <StyledTitle>
-        Phonebook <FcSmartphoneTablet />
-      </StyledTitle>
-      <ContactsForm />
-      <StyledTitle>
-        Filter
-        <FcFilledFilter />
-      </StyledTitle>
-      <Filter />
-      <StyledTitle>
-        Contacts <FcTodoList />
-      </StyledTitle>
-      {!load ? <ContactList /> : <h1>Loading...</h1>} */}
+      {!carsFavorite.length ? (
+        <div>No any cars are in your favorite list</div>
+      ) : null}
+      <StyledOl>
+        {favoriteList.map(car => {
+          return (
+            <StyledItem key={car.id}>
+              <StyledHart onClick={() => toggleFavoriteList(car)}>
+                {carsFavorite.some(item => car.id === item.id) ? (
+                  <Favorite>
+                    <SpriteSVG name="hart" />
+                  </Favorite>
+                ) : (
+                  <NotFavorite>
+                    <SpriteSVG name="hart" />
+                  </NotFavorite>
+                )}
+              </StyledHart>
+              <StyledImgDiv>
+                <StyledImg src={car.img} alt={car.model} />
+              </StyledImgDiv>
+              <StyledTitleCard>
+                <StyledTitleFirstPart>
+                  {car.make}
+                  <StyledCarModel>{car.model},</StyledCarModel>
+                  {car.year}
+                </StyledTitleFirstPart>
+                <div>{car.rentalPrice}</div>
+              </StyledTitleCard>
+              <StyledCarDescription>
+                {car.address.split(',')[1]} | {car.address.split(',')[2]} |{' '}
+                {car.rentalCompany.replace(`/\bPremium\b/gi`, '')}
+                {(
+                  car.address.split(',')[1] +
+                  car.address.split(',')[2] +
+                  car.rentalCompany
+                ).length < 37
+                  ? '| Premium'
+                  : null}
+              </StyledCarDescription>
+              <StyledCarDescription>
+                {car.type} | {car.model} | {car.id} |{' '}
+                {car.accessories[Math.floor(Math.random() * 3)]}
+              </StyledCarDescription>
+              <StyledLoadMoreBtn>Learn More</StyledLoadMoreBtn>
+            </StyledItem>
+          );
+        })}
+      </StyledOl>
     </StyledDiv>
   );
 };
-
-export const StyledDiv = styled.div`
-  padding: 20px 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const StyledTitle = styled.h2`
-  color: #6150f7;
-  -webkit-text-stroke: 0.2px white;
-  margin-bottom: 5px;
-`;
