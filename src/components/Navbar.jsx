@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 // import { logoutThunk } from 'redux/Auth/authOperations';
 // import { logoutThunk } from 'redux/authOperations';
 // import {

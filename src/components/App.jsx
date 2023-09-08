@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { Modal } from './Modal';
+import {  useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import NotFound from './pages/NotFound/NotFound';
 import { Layout } from './Layout';
@@ -9,7 +8,6 @@ import { Favorites } from './pages/Favorites/Favorites';
 import { useDispatch } from 'react-redux';
 
 export const App = () => {
-  const [carItem, setCarItem] = useState('');
 
   const dispatch = useDispatch();
   // useEffect(() => {
