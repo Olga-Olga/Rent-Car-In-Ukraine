@@ -1,15 +1,14 @@
-import {  useState } from 'react';
+// import {  useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import NotFound from './pages/NotFound/NotFound';
 import { Layout } from './Layout';
 import { Home } from './pages/Home/Home';
 import { Catalog } from './pages/Catalog/Catalog';
 import { Favorites } from './pages/Favorites/Favorites';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
 export const App = () => {
-
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // useEffect(() => {
   //   dispatch(fetchCars());
   // }, [dispatch]);
