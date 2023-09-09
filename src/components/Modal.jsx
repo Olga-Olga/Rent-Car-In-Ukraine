@@ -54,10 +54,9 @@ export const Modal = ({ onClose, children }) => {
       <div className="overlay" onClick={handleBackDropClick}>
         <StyledModalWrapper>
           <StyledFigure>
-            <StyledImgModal src={car.img} alt={car.model} />
+            <StyledImgModal $imageUrl={car.img} alt={car.model} />
             <StyledImgTitle>
-              {car.make}
-              <StyledCarModel>{car.model},</StyledCarModel>
+              {car.make} <StyledCarModel>{car.model}</StyledCarModel>,{' '}
               {car.year}
             </StyledImgTitle>
           </StyledFigure>

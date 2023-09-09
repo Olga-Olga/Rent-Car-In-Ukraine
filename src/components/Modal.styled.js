@@ -19,7 +19,7 @@ export const StyledTitle = styled.h2`
   margin-bottom: 5px;
 `;
 
-export const StyledCarModel = styled.div`
+export const StyledCarModel = styled.span`
   color: #3470ff;
 `;
 
@@ -41,7 +41,7 @@ export const StyledModalWrapper = styled.div`
   align-content: flex-start;
   position: relative;
   width: 541px;
-  height: 90vh;
+  height: 100vh;
   max-height: 752px;
   background: #fff;
   border-radius: 24px;
@@ -52,8 +52,8 @@ export const StyledModalWrapper = styled.div`
     height: 100px;
   }
   &::-webkit-scrollbar-thumb {
-    background: #666666; /* Цвет ползунка */
-    border-radius: 10px; /* Скругляем углы ползунка */
+    background: #666666;
+    border-radius: 10px;
   }
   .scroll-container::-webkit-scrollbar-thumb:hover {
     background: #3470ff;
@@ -64,8 +64,6 @@ export const StyledTel = styled.a`
   display: inline-block;
   padding: 12px 50px;
   text-decoration: none;
-  /* justify-content: center;
-  align-items: center; */
   border-radius: 12px;
   background: #3470ff;
   width: fit-content;
@@ -84,24 +82,17 @@ export const StyledX = styled.div`
   stroke: black;
 `;
 
-export const StyledImgModal = styled.img`
+export const StyledImgModal = styled.div`
   height: 268px;
   width: 100%;
-  object-fit: fit;
   border-radius: 14px;
-  background: linear-gradient(
-    180deg,
-    rgba(18, 20, 23, 0.5) 2.5%,
-    rgba(18, 20, 23, 0) 41.07%
-  );
-  url(${props => props.$imageUrl}), lightgray 50% / cover no-repeat;
+  background: url(${props => props.$imageUrl}), lightgray 50% / cover no-repeat;
+  background-size: cover;
+  background-position: left;
+  background-repeat: no-repeat;
 `;
 
 export const StyledImgTitle = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  justify-content: flex-start;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.3;

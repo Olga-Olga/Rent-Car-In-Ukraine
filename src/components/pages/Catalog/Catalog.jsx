@@ -117,8 +117,10 @@ export const Catalog = () => {
       </StyledFilterBlock> */}
       <StyledOl>
         {carList.map(car => {
-          const carMake = cuttingText(car.make, 10);
-          const carModel = cuttingText(car.model, 10);
+          const firstLineStructure =
+            car.make.length + car.model.length < 13 && car.make.length < 6
+              ? true
+              : false;
 
           return (
             <StyledItem key={car.id}>
@@ -135,13 +137,14 @@ export const Catalog = () => {
               </StyledHart>
               <StyledImgDiv>
                 <StyledImg $imageUrl={car.img} alt={car.model} />
-                {/* <StyledImg src={car.img} alt={car.model} /> */}
               </StyledImgDiv>
               <StyledTitleCard>
                 <StyledTitleFirstPart>
-                  {carMake}
-                  <StyledCarModel>{carModel},</StyledCarModel>
-                  {car.year}
+                  {car.make}
+                  {firstLineStructure ? (
+                    <StyledCarModel> {car.model}</StyledCarModel>
+                  ) : null}
+                  , {car.year}
                 </StyledTitleFirstPart>
                 <div>{car.rentalPrice}</div>
               </StyledTitleCard>

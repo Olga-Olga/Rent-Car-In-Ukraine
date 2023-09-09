@@ -29,6 +29,8 @@ import {
 import { SpriteSVG } from 'components/assets/SpriteSVG';
 import { useState } from 'react';
 import { Modal } from 'components/Modal';
+import { NavLink } from 'react-router-dom';
+import { StyledDivWrapper } from './Favorites.styled';
 
 export const Favorites = () => {
   const dispatch = useDispatch();
@@ -66,10 +68,17 @@ export const Favorites = () => {
   return (
     <StyledDiv>
       {!carsFavorite.length ? (
-        <div>No any cars are in your favorite list</div>
+        <StyledDivWrapper>
+          No any cars are now in your favorite list. Click{' '}
+          <NavLink to="/catalog">here</NavLink> to Review the Catalog
+        </StyledDivWrapper>
       ) : null}
       <StyledOl>
         {carsFavoriteBlock.map(car => {
+          const firstLineStructure =
+            car.make.length + car.model.length < 13 && car.make.length < 6
+              ? true
+              : false;
           return (
             <StyledItem key={car.id}>
               <StyledHart onClick={() => toggleFavoriteList(car)}>
@@ -84,13 +93,16 @@ export const Favorites = () => {
                 )}
               </StyledHart>
               <StyledImgDiv>
-                <StyledImg src={car.img} alt={car.model} />
+                {/* <StyledImg src={car.img} alt={car.model} /> */}
+                <StyledImg $imageUrl={car.img} alt={car.model} />
               </StyledImgDiv>
               <StyledTitleCard>
                 <StyledTitleFirstPart>
                   {car.make}
-                  <StyledCarModel>{car.model},</StyledCarModel>
-                  {car.year}
+                  {firstLineStructure ? (
+                    <StyledCarModel> {car.model}</StyledCarModel>
+                  ) : null}
+                  , {car.year}
                 </StyledTitleFirstPart>
                 <div>{car.rentalPrice}</div>
               </StyledTitleCard>

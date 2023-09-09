@@ -14,7 +14,6 @@ export const App = () => {
         <Route path="catalog" element={<Catalog />} />
         <Route path="favorites" element={<Favorites />} />
       </Route>
-
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

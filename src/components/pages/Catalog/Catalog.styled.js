@@ -73,14 +73,11 @@ export const StyledTitleCard = styled.div`
 `;
 
 export const StyledTitleFirstPart = styled.div`
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 3px;
 `;
 
-export const StyledCarModel = styled.div`
-  color: #3470ff;
+export const StyledCarModel = styled.span`
+  color: ${({ theme }) => theme.colors.blue};
 `;
 
 export const StyledCarDescription = styled.div`
@@ -93,7 +90,7 @@ export const StyledCarDescription = styled.div`
   align-items: center;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis; */
 `;
 
 export const StyledLoadMoreBtn = styled.button`
@@ -105,8 +102,8 @@ export const StyledLoadMoreBtn = styled.button`
   align-items: center;
   flex-shrink: 0;
   border-radius: 12px;
-  background: #3470ff;
-  color: #fff;
+  background: ${({ theme }) => theme.colors.blue};
+  color: ${({ theme }) => theme.colors.lightWhite};
   font-size: 14px;
   font-weight: 600;
   line-height: 1.42;
@@ -119,7 +116,7 @@ export const StyledLoadMoreBtn = styled.button`
 
 export const StyledLoadMoreLink = styled.button`
   border: 0;
-  color: #3470ff;
+  color: ${({ theme }) => theme.colors.blue};
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
@@ -144,7 +141,7 @@ export const StyledSelectFrom = styled.select``;
 export const StyledSelectTo = styled.select``;
 
 export const StyledDivLable = styled.div`
-  color: #8a8a89;
+  color: ${({ theme }) => theme.colors.grey};
   font-size: 14px;
   font-weight: 500;
   line-height: 1.28;
@@ -161,11 +158,11 @@ export const StyledHart = styled.div`
 `;
 
 export const Favorite = styled.div`
-  fill: #9747ff;
-  stroke: #9747ff;
+  fill: ${({ theme }) => theme.colors.perple};
+  stroke: ${({ theme }) => theme.colors.perple};
 `;
 
 export const NotFavorite = styled.div`
-  stroke: #ffffffcc;
+  stroke: ${({ theme }) => theme.colors.light};
   fill: transparent;
 `;

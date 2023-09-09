@@ -8,6 +8,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from 'components/styles/theme';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter basename="/Rent-Car-In-Ukraine">
@@ -15,7 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Provider store={store}>
         <App />
       </Provider>
-      <ToastContainer />
+      <ToastContainer autoClose="600" />
     </ThemeProvider>
   </BrowserRouter>
 );
