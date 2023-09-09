@@ -6,3 +6,17 @@ export function addCommasToNumber(number) {
     parts.length > 1 ? integerPart + '.' + parts[1] : integerPart;
   return formattedNumber;
 }
+
+export function cuttingText(text, num) {
+  if (text.length > num) {
+    return text.slice(0, num) + '...';
+  } else {
+    return text;
+  }
+}
+
+export function cuttingTextLastSpace(text, max) {
+  text.slice(0, 47);
+  const lastSpace = text.lastIndexOf(' ');
+  return text.slice(0, lastSpace);
+}

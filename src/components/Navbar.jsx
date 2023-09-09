@@ -17,7 +17,7 @@ const NavLinkStyled = styled(NavLink)`
   text-decoration: none;
   padding: 5px;
   &.active {
-    background-color: #8f82f5;
+    background-color: #9747ff;
     color: white;
     border-radius: 5px;
     padding: 5px;

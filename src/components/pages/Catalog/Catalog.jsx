@@ -28,6 +28,7 @@ import {
   StyledTitleFirstPart,
 } from './Catalog.styled';
 import { SpriteSVG } from 'components/assets/SpriteSVG';
+import { cuttingText } from 'components/assets/helperMethods';
 
 export const Catalog = () => {
   const dispatch = useDispatch();
@@ -116,6 +117,9 @@ export const Catalog = () => {
       </StyledFilterBlock> */}
       <StyledOl>
         {carList.map(car => {
+          const carMake = cuttingText(car.make, 10);
+          const carModel = cuttingText(car.model, 10);
+
           return (
             <StyledItem key={car.id}>
               <StyledHart onClick={() => toggleFavoriteList(car)}>
@@ -130,13 +134,13 @@ export const Catalog = () => {
                 )}
               </StyledHart>
               <StyledImgDiv>
-                {/* <StyledImg $imageUrl={car.img} alt={car.model} /> */}
-                <StyledImg src={car.img} alt={car.model} />
+                <StyledImg $imageUrl={car.img} alt={car.model} />
+                {/* <StyledImg src={car.img} alt={car.model} /> */}
               </StyledImgDiv>
               <StyledTitleCard>
                 <StyledTitleFirstPart>
-                  {car.make}
-                  <StyledCarModel>{car.model},</StyledCarModel>
+                  {carMake}
+                  <StyledCarModel>{carModel},</StyledCarModel>
                   {car.year}
                 </StyledTitleFirstPart>
                 <div>{car.rentalPrice}</div>

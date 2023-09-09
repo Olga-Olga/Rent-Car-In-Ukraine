@@ -1,10 +1,11 @@
 import { styled } from 'styled-components';
 
 export const StyledDiv = styled.div`
-  padding: 115px 143px 150px 143px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 115px;
+  padding-right: 129px;
 `;
 
 export const StyledTitle = styled.h2`
@@ -31,29 +32,31 @@ export const StyledItem = styled.li`
   height: 426px;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
   flex-shrink: 0;
   overflow-x: hidden;
   position: relative;
 `;
 
-export const StyledImg = styled.img`
-  height: 268px;
+export const StyledImgDiv = styled.div`
+  height: auto;
   width: 100%;
-  object-fit: fit;
+  border-radius: 14px;
+`;
+
+export const StyledImg = styled.div`
+  aspect-ratio: 268 / 401;
+  max-height: 268px;
+  width: 100%;
   border-radius: 14px;
   background: linear-gradient(
-    180deg,
-    rgba(18, 20, 23, 0.5) 2.5%,
-    rgba(18, 20, 23, 0) 41.07%
-  );
-  url(${props => props.$imageUrl}), lightgray 50% / cover no-repeat;
- `;
-
-export const StyledImgDiv = styled.div`
-  height: 268px;
-  width: 100%;
-  border-radius: 14px;
+      180deg,
+      rgba(18, 20, 23, 0.5) 2.5%,
+      rgba(18, 20, 23, 0) 41.07%
+    ),
+    url(${props => props.$imageUrl}), lightgray 50% / cover no-repeat;
+  background-size: cover;
+  background-position: left;
+  background-repeat: no-repeat;
 `;
 
 export const StyledTitleCard = styled.div`
@@ -65,6 +68,8 @@ export const StyledTitleCard = styled.div`
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
+  margin-top: 14px;
+  margin-bottom: 8px;
 `;
 
 export const StyledTitleFirstPart = styled.div`
@@ -82,7 +87,7 @@ export const StyledCarDescription = styled.div`
   color: rgba(18, 20, 23, 0.5);
   font-size: 12px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -106,6 +111,7 @@ export const StyledLoadMoreBtn = styled.button`
   font-weight: 600;
   line-height: 1.42;
   border: 0;
+  margin-top: 28px;
   &:hover {
     background: #0b44cd;
   }
@@ -119,6 +125,9 @@ export const StyledLoadMoreLink = styled.button`
   line-height: 1.5;
   text-decoration-line: underline;
   background-color: white;
+  padding-top: 100px;
+  padding-bottom: 150px;
+
   &:hover {
     color: #0b44cd;
   }

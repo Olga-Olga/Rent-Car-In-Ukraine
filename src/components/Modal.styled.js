@@ -35,8 +35,6 @@ export const StyledBlueBumber = styled.span`
 `;
 
 export const StyledModalWrapper = styled.div`
-  font-family: Manrope, serif;
-  font-style: normal;
   padding: 40px;
   display: flex;
   flex-direction: column;
