@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Rent-Car-In-Ukraine/static/css/main.4a0587a2.css",
-    "main.js": "/Rent-Car-In-Ukraine/static/js/main.29434a41.js",
+    "main.css": "/Rent-Car-In-Ukraine/static/css/main.e349b130.css",
+    "main.js": "/Rent-Car-In-Ukraine/static/js/main.12f67d1a.js",
     "index.html": "/Rent-Car-In-Ukraine/index.html",
-    "main.4a0587a2.css.map": "/Rent-Car-In-Ukraine/static/css/main.4a0587a2.css.map",
-    "main.29434a41.js.map": "/Rent-Car-In-Ukraine/static/js/main.29434a41.js.map"
+    "main.e349b130.css.map": "/Rent-Car-In-Ukraine/static/css/main.e349b130.css.map",
+    "main.12f67d1a.js.map": "/Rent-Car-In-Ukraine/static/js/main.12f67d1a.js.map"
   },
   "entrypoints": [
-    "static/css/main.4a0587a2.css",
-    "static/js/main.29434a41.js"
+    "static/css/main.e349b130.css",
+    "static/js/main.12f67d1a.js"
   ]
 }
