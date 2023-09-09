@@ -7,7 +7,7 @@ export const StyledGreyBox = styled.div`
   border-radius: 35px;
   background: #f9f9f9;
   width: auto;
-  color: #363535;
+  color: ${({ theme }) => theme.colors.dark};
   font-size: 12px;
   font-weight: 400;
   line-height: 1.5;
@@ -20,7 +20,7 @@ export const StyledTitle = styled.h2`
 `;
 
 export const StyledCarModel = styled.span`
-  color: #3470ff;
+  color: ${({ theme }) => theme.colors.blue};
 `;
 
 export const StyledConditionBlock = styled.div`
@@ -31,7 +31,7 @@ export const StyledConditionBlock = styled.div`
 `;
 
 export const StyledBlueBumber = styled.span`
-  color: #3470ff;
+  color: ${({ theme }) => theme.colors.blue};
 `;
 
 export const StyledModalWrapper = styled.div`
@@ -43,7 +43,7 @@ export const StyledModalWrapper = styled.div`
   width: 541px;
   height: 100vh;
   max-height: 752px;
-  background: #fff;
+  background: white;
   border-radius: 24px;
   flex-shrink: 0;
   overflow: auto;
@@ -56,7 +56,7 @@ export const StyledModalWrapper = styled.div`
     border-radius: 10px;
   }
   .scroll-container::-webkit-scrollbar-thumb:hover {
-    background: #3470ff;
+    background: ${({ theme }) => theme.colors.blue};
   }
 `;
 
@@ -65,9 +65,9 @@ export const StyledTel = styled.a`
   padding: 12px 50px;
   text-decoration: none;
   border-radius: 12px;
-  background: #3470ff;
+  background: ${({ theme }) => theme.colors.blue};
   width: fit-content;
-  color: var(--White, #fff);
+  color: white;
   font-size: 14px;
   font-weight: 600;
   margin-top: 24px;
