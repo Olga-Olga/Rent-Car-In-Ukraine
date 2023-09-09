@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 
-const StNavLink = styled(NavLink)`
-  display: flex;
-`;
+// const StNavLink = styled(NavLink)`
+//   display: flex;
+// `;
 
 export const StyledDiv = styled.h3`
   width: 400px;

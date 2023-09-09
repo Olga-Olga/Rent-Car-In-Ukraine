@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectCars,
+  // selectCars,
   selectCurrentPage,
   selectFavorite,
   selectItemOnPage,

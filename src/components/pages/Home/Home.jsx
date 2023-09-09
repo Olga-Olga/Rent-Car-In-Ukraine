@@ -1,9 +1,8 @@
 import React from 'react';
 import {
   StyledDiv,
-  NavLinkStyled,
+  // NavLinkStyled,
   StyledDivWrapper,
-  GradientOverlay,
 } from './Home.styled';
 import { NavLink } from 'react-router-dom';
 
