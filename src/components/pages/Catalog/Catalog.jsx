@@ -16,6 +16,8 @@ import {
   StyledCarDescription,
   StyledCarModel,
   StyledDiv,
+  StyledDivLable,
+  StyledFilterBlock,
   StyledHart,
   StyledImg,
   StyledImgDiv,
@@ -28,15 +30,14 @@ import {
   StyledTitleFirstPart,
 } from './Catalog.styled';
 import { SpriteSVG } from 'components/assets/SpriteSVG';
-import { cuttingText } from 'components/assets/helperMethods';
+import { listOfUnique } from 'components/assets/helperMethods';
 
 export const Catalog = () => {
   const dispatch = useDispatch();
   const [selectedCar, setSelectedCar] = useState(null);
   const currentPage = useSelector(selectCurrentPage);
   const itemsOnPage = useSelector(selectItemOnPage);
-  const startIndex = (currentPage - 1) * itemsOnPage;
-  const endIndex = startIndex + itemsOnPage;
+  const endIndex = currentPage * itemsOnPage;
   const carList = useSelector(selectCars).slice(0, endIndex);
   const onPageUpload = () => {
     dispatch(incrementPage());
@@ -56,9 +57,6 @@ export const Catalog = () => {
       dispatch(addToFavoriteList(car));
     }
   };
-  // const uniquePrices = [...new Set(carList.map(car => car.rentalPrice))].sort(
-  //   (a, b) => b - a
-  // );
 
   const onOpenModal = id => {
     setSelectedCar(id);
@@ -72,15 +70,15 @@ export const Catalog = () => {
   return (
     <StyledDiv>
       <StyledTitle>Catalog here</StyledTitle>
-      {/* <StyledFilterBlock>
+      <StyledFilterBlock>
         <StyledDivLable>
           <div>Car brand</div>
           <select>
             <option value="" disabled selected>
               Enter the text
             </option>
-            {carList.map(car => {
-              return <option key={car.id}>{car.make}</option>;
+            {listOfUnique(useSelector(selectCars), 'make').map(make => {
+              return <option key={make}>{make}</option>;
             })}
           </select>
         </StyledDivLable>
@@ -90,38 +88,37 @@ export const Catalog = () => {
             <option value="" disabled selected>
               To $
             </option>
-            {uniquePrices.map(price => {
+            {listOfUnique(useSelector(selectCars), 'rentalPrice').map(price => {
               return <option key={price}>{price}</option>;
             })}
           </select>
         </StyledDivLable>
         <StyledDivLable>
           <div>Сar mileage / km</div>
-          <div class="double-select">
-            <select class="column" id="from">
-              <option value="" disabled selected>
-                From
-              </option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-            </select>
-            <select class="column" id="to">
-              <option value="" disabled selected>
-                To
-              </option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-            </select>
+          <div>
+            <input
+              type="number"
+              name="quantity"
+              id="quantity"
+              min="0"
+              step="1"
+            />
+            <input
+              type="number"
+              name="quantity"
+              id="quantity"
+              min="0"
+              step="1"
+            />
           </div>
         </StyledDivLable>
-      </StyledFilterBlock> */}
+      </StyledFilterBlock>
       <StyledOl>
         {carList.map(car => {
           const firstLineStructure =
             car.make.length + car.model.length < 13 && car.make.length < 6
               ? true
               : false;
-
           return (
             <StyledItem key={car.id}>
               <StyledHart onClick={() => toggleFavoriteList(car)}>

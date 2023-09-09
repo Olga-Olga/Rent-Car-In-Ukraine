@@ -20,3 +20,15 @@ export function cuttingTextLastSpace(text, max) {
   const lastSpace = text.lastIndexOf(' ');
   return text.slice(0, lastSpace);
 }
+
+export function listOfUnique(cars, field) {
+  if (field === 'rentalPrice') {
+    return cars
+      .map(car => car[field].replace(/\$/g, ''))
+      .filter((value, index, arr) => arr.indexOf(value) === index)
+      .sort((a, b) => a - b);
+  }
+  return cars
+    .map(car => car[field])
+    .filter((value, index, arr) => arr.indexOf(value) === index);
+}

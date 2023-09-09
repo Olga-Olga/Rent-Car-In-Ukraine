@@ -12,7 +12,7 @@ export const StyledTitle = styled.h2`
   display: none;
 `;
 
-export const StyledFilterBlock = styled.div`
+export const StyledFilterBlock = styled.form`
   display: flex;
   gap: 18px;
 `;

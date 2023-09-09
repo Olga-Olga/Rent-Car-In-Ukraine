@@ -13,14 +13,11 @@ export const getCarsThunk = createAsyncThunk(
     try {
       const { data } = await axios.get(`/advert`);
       Loading.remove();
-      toast.success('Our cars successfuly loaded!', {
-        position: toast.POSITION.TOP_RIGHT,
-      });
       return data;
     } catch (err) {
       Loading.remove();
       toast.error(
-        `Sorry, there is an error: ${err.message}. Try to come later.`,
+        `Sorry, there is an error: ${err.message}. Try to come later. If you see car, they could ba saved from you last visited our platform.`,
         {
           position: toast.POSITION.TOP_CENTER,
         }

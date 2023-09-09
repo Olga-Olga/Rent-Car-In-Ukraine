@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-// import { NavBar } from './NavBar';
-// import { Header } from './HeaderBar/Header';
 import { Navbar } from './Navbar';
 
 export const Layout = () => {
   return (
     <LayoutWrapper>
       <Navbar />
-      <Outlet />
+      <Suspense>
+        <Outlet />
+      </Suspense>
     </LayoutWrapper>
   );
 };

@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  // selectCars,
   selectCurrentPage,
   selectFavorite,
   selectItemOnPage,
@@ -58,8 +57,7 @@ export const Favorites = () => {
     dispatch(incrementPage());
   };
 
-  const startIndex = (currentPage - 1) * itemsOnPage;
-  const endIndex = startIndex + itemsOnPage;
+  const endIndex = currentPage * itemsOnPage;
   const carsFavoriteBlock = useSelector(selectFavorite).slice(0, endIndex);
 
   const displayLoadMore =
