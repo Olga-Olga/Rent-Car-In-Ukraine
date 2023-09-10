@@ -44,12 +44,11 @@ const Catalog = () => {
   const totalPages = useSelector(selectTotalPages);
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedPrice, setSelectedPrice] = useState('');
+  const [searchPerformed, setSearchPerformed] = useState(false);
 
   const onPageUpload = () => {
     dispatch(incrementPage());
   };
-
-  const displayLoadMore = currentPage < totalPages;
 
   useEffect(() => {
     dispatch(getCarsThunkPerPage(currentPage));
@@ -93,9 +92,8 @@ const Catalog = () => {
     });
 
     dispatch(setItems(filteredCars));
+    setSearchPerformed(true);
   };
-
-  carList = uniqueCarts(carList, 'id');
 
   return (
     <StyledDiv>
@@ -139,7 +137,7 @@ const Catalog = () => {
         </StyledDivLable>
       </StyledFilterBlock>
       <StyledOl>
-        {carList.map(car => {
+        {uniqueCarts(carList, 'id').map(car => {
           const firstLineStructure =
             car.make.length + car.model.length < 13 && car.make.length < 6
               ? true
@@ -192,7 +190,7 @@ const Catalog = () => {
           );
         })}
       </StyledOl>
-      {displayLoadMore ? (
+      {!searchPerformed && currentPage < totalPages ? (
         <StyledLoadMoreLink onClick={onPageUpload}>
           Load More
         </StyledLoadMoreLink>

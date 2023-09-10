@@ -34,7 +34,6 @@ export const getThunkAllCars = createAsyncThunk(
     try {
       const { data } = await axios.get(`/advert`);
       Loading.remove();
-
       return data;
     } catch (err) {
       Loading.remove();
