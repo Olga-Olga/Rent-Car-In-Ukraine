@@ -11,7 +11,7 @@ export const getCarsThunkPerPage = createAsyncThunk(
   async (page, { rejectWithValue }) => {
     Loading.standard();
     try {
-      const { data } = await axios.get(`/advpage?currentPage=${page}`);
+      const { data } = await axios.get(`/advert?currentPage=${page}`);
       Loading.remove();
       return data[0];
     } catch (err) {
