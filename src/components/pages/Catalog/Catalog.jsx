@@ -7,7 +7,6 @@ import {
   selectCars,
   selectCurrentPage,
   selectFavorite,
-  selectItemOnPage,
   selectTotalPages,
 } from 'redux/car/carSelector';
 import { removeFromFavoriteList, addToFavoriteList } from 'redux/car/carSlice';
@@ -17,8 +16,6 @@ import {
   StyledCarDescription,
   StyledCarModel,
   StyledDiv,
-  StyledDivLable,
-  StyledFilterBlock,
   StyledHart,
   StyledImg,
   StyledImgDiv,
