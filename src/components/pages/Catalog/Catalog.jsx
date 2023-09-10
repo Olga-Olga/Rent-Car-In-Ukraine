@@ -128,7 +128,7 @@ const Catalog = () => {
         </StyledDivLable>
         <StyledDivLable>
           <div> </div>
-          <StyledSearchBtn type="submit">Search</StyledSearchBtn>
+          <StyledSearchBtn type="submit">Search on the Page</StyledSearchBtn>
         </StyledDivLable>
       </StyledFilterBlock>
       <StyledOl>

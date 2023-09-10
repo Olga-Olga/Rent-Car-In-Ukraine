@@ -26,6 +26,7 @@ export function listOfUnique(cars, field) {
     return cars
       .map(car => car[field].replace(/\$/g, ''))
       .filter((value, index, arr) => arr.indexOf(value) === index)
+      .filter(value => parseInt(value) % 10 === 0)
       .sort((a, b) => a - b);
   }
   return cars
