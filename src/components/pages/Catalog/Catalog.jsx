@@ -42,7 +42,6 @@ const Catalog = () => {
   const totalPages = useSelector(selectTotalPages);
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedPrice, setSelectedPrice] = useState('');
-  const [filteredCarList, setFilteredCarList] = useState(carList);
 
   const onPageUpload = () => {
     dispatch(incrementPage());
@@ -92,10 +91,6 @@ const Catalog = () => {
 
     dispatch(setItems(filteredCars));
   };
-
-  useEffect(() => {
-    setFilteredCarList(carList);
-  }, [carList]);
 
   return (
     <StyledDiv>
