@@ -48,11 +48,15 @@ including photos and technical specifications. Simple car reservation process.
 
 # Technologies Used
 
-This project utilizes the following technologies: [React]: The core framework
-for user interface development. [React Router]: For route management and
-navigation. [Redux]: For state management. [Axios]: For making HTTP requests to
-the server. [Styled-components]: For component styling. [React-toastify]: For
-displaying notifications.
+This project utilizes the following technologies: 
+- [React](https://reactjs.org/): The core framework
+for user interface development.
+- [React Router](https://reactrouter.com/):  For route management and
+navigation.
+- [Redux](https://redux.js.org/): For state management.
+- [Axios](https://axios-http.com/): For making HTTP requests to the server.
+- [Styled-components](https://styled-components.com/): For component styling.
+- [React-toastify](https://fkhadra.github.io/react-toastify/introduction): For displaying notifications.
 
 Getting Started To run this project locally, visit the following link:
 https://olga-olga.github.io/Rent-Car-In-Ukraine/
