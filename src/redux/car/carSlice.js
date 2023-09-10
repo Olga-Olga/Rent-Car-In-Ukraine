@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getCarsThunk } from './carOperations';
+import { getCarsThunkPerPage } from './carOperations';
 
 const carSlice = createSlice({
   name: 'cars',
@@ -14,15 +14,16 @@ const carSlice = createSlice({
     favoriteList: [],
     currentPage: 1,
     itemsOnPage: 8,
+    totalPages: 1,
   },
   reducers: {
-    filterChanges: (state, { payload }) => {
-      state.filter = payload;
-      console.log(state.filter);
-    },
-    filteredCar: (state, { payload }) => {
-      state.cars.items = state.cars.items.filter(car => car.id !== payload);
-    },
+    // filterChanges: (state, { payload }) => {
+    //   state.filter = payload;
+    //   console.log(state.filter);
+    // },
+    // filteredCar: (state, { payload }) => {
+    //   state.cars.items = state.cars.items.filter(car => car.id !== payload);
+    // },
     changeModalWindow: (state, { payload }) => {
       state.isOpenModal = !state.isOpenModal;
     },
@@ -37,20 +38,34 @@ const carSlice = createSlice({
     incrementPage: (state, { payload }) => {
       state.currentPage += 1;
     },
+    clearData: (state, { payload }) => {
+      state.cars.items = [];
+      state.currentPage = 1;
+      state.itemsOnPage = 8;
+      state.totalPages = 1;
+    },
   },
 
   extraReducers: builder => {
     builder
-      .addCase(getCarsThunk.fulfilled, (state, action) => {
-        state.cars.items = action.payload;
-        state.cars.isLoading = false;
-      })
-      .addMatcher(isAnyOf(getCarsThunk.fulfilled), (state, action) => {
-        state.cars.isLoading = false;
-      })
-      .addMatcher(isAnyOf(getCarsThunk.pending), (state, action) => {
-        state.cars.isLoading = true;
+      // .addCase(getCarsThunk.fulfilled, (state, action) => {
+      //   state.cars.items = action.payload;
+      //   state.cars.isLoading = false;
+      // })
+
+      .addCase(getCarsThunkPerPage.fulfilled, (state, action) => {
+        state.cars.items.push(...action.payload.items);
+        state.currentPage = action.payload.currentPage;
+        state.itemsOnPage += action.payload.perPage;
+        state.totalPages = action.payload.totalPages;
       });
+
+    // .addMatcher(isAnyOf(getCarsThunk.fulfilled), (state, action) => {
+    //   state.cars.isLoading = false;
+    // })
+    // .addMatcher(isAnyOf(getCarsThunk.pending), (state, action) => {
+    //   state.cars.isLoading = true;
+    // });
   },
 });
 
@@ -60,4 +75,5 @@ export const {
   addToFavoriteList,
   removeFromFavoriteList,
   incrementPage,
+  clearData,
 } = carSlice.actions;

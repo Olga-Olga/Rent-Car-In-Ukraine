@@ -1,11 +1,9 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
 import { Home } from './pages/Home/Home';
-// import { lazy } from 'react';
-import { Catalog } from './pages/Catalog/Catalog';
-import { Favorites } from './pages/Favorites/Favorites';
-// const Catalog = lazy(() => import('./pages/Catalog/Catalog'));
-// const Favorites = lazy(() => import('./pages/Favorites/Favorites'));
+import { lazy } from 'react';
+const Catalog = lazy(() => import('./pages/Catalog/Catalog'));
+const Favorites = lazy(() => import('./pages/Favorites/Favorites'));
 
 export const App = () => {
   return (

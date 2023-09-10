@@ -31,7 +31,7 @@ import { Modal } from 'components/Modal';
 import { NavLink } from 'react-router-dom';
 import { StyledDivWrapper } from './Favorites.styled';
 
-export const Favorites = () => {
+const Favorites = () => {
   const dispatch = useDispatch();
   const carsFavorite = useSelector(selectFavorite);
   const currentPage = useSelector(selectCurrentPage);
@@ -91,7 +91,6 @@ export const Favorites = () => {
                 )}
               </StyledHart>
               <StyledImgDiv>
-                {/* <StyledImg src={car.img} alt={car.model} /> */}
                 <StyledImg $imageUrl={car.img} alt={car.model} />
               </StyledImgDiv>
               <StyledTitleCard>
@@ -139,3 +138,5 @@ export const Favorites = () => {
     </StyledDiv>
   );
 };
+
+export default Favorites;

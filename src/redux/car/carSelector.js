@@ -5,3 +5,4 @@ export const selectFavorite = state => state.favoriteList;
 export const selectIsModalOpen = state => state.isOpenModal;
 export const selectItemOnPage = state => state.itemsOnPage;
 export const selectCurrentPage = state => state.currentPage;
+export const selectTotalPages = state => state.totalPages;

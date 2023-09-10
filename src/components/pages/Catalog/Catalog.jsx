@@ -1,13 +1,14 @@
 import { Modal } from 'components/Modal';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCarsThunk } from 'redux/car/carOperations';
-import { incrementPage } from 'redux/car/carSlice';
+import { getCarsThunkPerPage } from 'redux/car/carOperations';
+import { clearData, incrementPage } from 'redux/car/carSlice';
 import {
   selectCars,
   selectCurrentPage,
   selectFavorite,
   selectItemOnPage,
+  selectTotalPages,
 } from 'redux/car/carSelector';
 import { removeFromFavoriteList, addToFavoriteList } from 'redux/car/carSlice';
 import {
@@ -32,21 +33,31 @@ import {
 import { SpriteSVG } from 'components/assets/SpriteSVG';
 import { listOfUnique } from 'components/assets/helperMethods';
 
-export const Catalog = () => {
+const Catalog = () => {
   const dispatch = useDispatch();
   const [selectedCar, setSelectedCar] = useState(null);
   const currentPage = useSelector(selectCurrentPage);
+
   const itemsOnPage = useSelector(selectItemOnPage);
   const endIndex = currentPage * itemsOnPage;
-  const carList = useSelector(selectCars).slice(0, endIndex);
+  // const carList = useSelector(selectCars).slice(0, endIndex);
+  const carList = useSelector(selectCars);
+  const totalPages = useSelector(selectTotalPages);
   const onPageUpload = () => {
     dispatch(incrementPage());
   };
 
-  const displayLoadMore = carList.length < useSelector(selectCars).length;
+  // const displayLoadMore = carList.length < useSelector(selectCars).length;
+  const displayLoadMore = currentPage < totalPages;
 
   useEffect(() => {
-    dispatch(getCarsThunk());
+    dispatch(getCarsThunkPerPage(currentPage));
+  }, [dispatch, currentPage]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearData());
+    };
   }, [dispatch]);
 
   const carsFavorite = useSelector(selectFavorite);
@@ -67,10 +78,18 @@ export const Catalog = () => {
     setSelectedCar(id);
   };
 
+
+
+  const onSubmitHandle => {
+  // запит за всіми машинками
+  //відфільтрувати машинки
+  }
+
+
   return (
     <StyledDiv>
       <StyledTitle>Catalog here</StyledTitle>
-      <StyledFilterBlock>
+      <StyledFilterBlock onSubmit={onSubmitHandle}>
         <StyledDivLable>
           <div>Car brand</div>
           <select>
@@ -180,3 +199,5 @@ export const Catalog = () => {
     </StyledDiv>
   );
 };
+
+export default Catalog;
