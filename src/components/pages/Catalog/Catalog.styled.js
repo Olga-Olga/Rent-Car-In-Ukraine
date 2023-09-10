@@ -24,6 +24,7 @@ export const StyledOl = styled.ol`
   flex-shrink: 0;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 1400px;
 `;
 
 export const StyledItem = styled.li`
