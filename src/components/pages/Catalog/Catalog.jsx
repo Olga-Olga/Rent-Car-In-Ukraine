@@ -26,7 +26,6 @@ import {
   StyledLoadMoreLink,
   StyledOl,
   StyledSearchBtn,
-  StyledSelect,
   StyledSelected,
   StyledTitle,
   StyledTitleCard,
@@ -82,7 +81,6 @@ const Catalog = () => {
   const onSubmitHandle = e => {
     e.preventDefault();
     const filteredCars = carList.filter(car => {
-      console.log(Number(car.rentalPrice.slice(1)));
       if (
         (!selectedBrand || car.make === selectedBrand) &&
         (!selectedPrice || Number(car.rentalPrice.slice(1)) <= selectedPrice)
