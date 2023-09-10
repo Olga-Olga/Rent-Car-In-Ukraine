@@ -33,9 +33,6 @@ const Catalog = () => {
   const dispatch = useDispatch();
   const [selectedCar, setSelectedCar] = useState(null);
   const currentPage = useSelector(selectCurrentPage);
-
-  // const itemsOnPage = useSelector(selectItemOnPage);
-  // const endIndex = currentPage * itemsOnPage;
   const carList = useSelector(selectCars);
   const totalPages = useSelector(selectTotalPages);
   const onPageUpload = () => {
