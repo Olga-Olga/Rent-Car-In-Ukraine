@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   StyledDiv,
-  // NavLinkStyled,
   StyledDivWrapper,
 } from './Home.styled';
 import { NavLink } from 'react-router-dom';

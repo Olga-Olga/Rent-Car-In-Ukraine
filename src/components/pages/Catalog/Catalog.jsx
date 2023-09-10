@@ -31,23 +31,20 @@ import {
   StyledTitleFirstPart,
 } from './Catalog.styled';
 import { SpriteSVG } from 'components/assets/SpriteSVG';
-import { listOfUnique } from 'components/assets/helperMethods';
 
 const Catalog = () => {
   const dispatch = useDispatch();
   const [selectedCar, setSelectedCar] = useState(null);
   const currentPage = useSelector(selectCurrentPage);
 
-  const itemsOnPage = useSelector(selectItemOnPage);
-  const endIndex = currentPage * itemsOnPage;
-  // const carList = useSelector(selectCars).slice(0, endIndex);
+  // const itemsOnPage = useSelector(selectItemOnPage);
+  // const endIndex = currentPage * itemsOnPage;
   const carList = useSelector(selectCars);
   const totalPages = useSelector(selectTotalPages);
   const onPageUpload = () => {
     dispatch(incrementPage());
   };
 
-  // const displayLoadMore = carList.length < useSelector(selectCars).length;
   const displayLoadMore = currentPage < totalPages;
 
   useEffect(() => {
@@ -78,60 +75,9 @@ const Catalog = () => {
     setSelectedCar(id);
   };
 
-
-
-  const onSubmitHandle => {
-  // запит за всіми машинками
-  //відфільтрувати машинки
-  }
-
-
   return (
     <StyledDiv>
       <StyledTitle>Catalog here</StyledTitle>
-      <StyledFilterBlock onSubmit={onSubmitHandle}>
-        <StyledDivLable>
-          <div>Car brand</div>
-          <select>
-            <option value="" disabled selected>
-              Enter the text
-            </option>
-            {listOfUnique(useSelector(selectCars), 'make').map(make => {
-              return <option key={make}>{make}</option>;
-            })}
-          </select>
-        </StyledDivLable>
-        <StyledDivLable>
-          <div>Price/ 1 hour</div>
-          <select>
-            <option value="" disabled selected>
-              To $
-            </option>
-            {listOfUnique(useSelector(selectCars), 'rentalPrice').map(price => {
-              return <option key={price}>{price}</option>;
-            })}
-          </select>
-        </StyledDivLable>
-        <StyledDivLable>
-          <div>Сar mileage / km</div>
-          <div>
-            <input
-              type="number"
-              name="quantity"
-              id="quantity"
-              min="0"
-              step="1"
-            />
-            <input
-              type="number"
-              name="quantity"
-              id="quantity"
-              min="0"
-              step="1"
-            />
-          </div>
-        </StyledDivLable>
-      </StyledFilterBlock>
       <StyledOl>
         {carList.map(car => {
           const firstLineStructure =

@@ -17,13 +17,6 @@ const carSlice = createSlice({
     totalPages: 1,
   },
   reducers: {
-    // filterChanges: (state, { payload }) => {
-    //   state.filter = payload;
-    //   console.log(state.filter);
-    // },
-    // filteredCar: (state, { payload }) => {
-    //   state.cars.items = state.cars.items.filter(car => car.id !== payload);
-    // },
     changeModalWindow: (state, { payload }) => {
       state.isOpenModal = !state.isOpenModal;
     },
@@ -48,24 +41,18 @@ const carSlice = createSlice({
 
   extraReducers: builder => {
     builder
-      // .addCase(getCarsThunk.fulfilled, (state, action) => {
-      //   state.cars.items = action.payload;
-      //   state.cars.isLoading = false;
-      // })
-
       .addCase(getCarsThunkPerPage.fulfilled, (state, action) => {
         state.cars.items.push(...action.payload.items);
         state.currentPage = action.payload.currentPage;
         state.itemsOnPage += action.payload.perPage;
         state.totalPages = action.payload.totalPages;
+      })
+      .addMatcher(isAnyOf(getCarsThunkPerPage.fulfilled), (state, action) => {
+        state.cars.isLoading = false;
+      })
+      .addMatcher(isAnyOf(getCarsThunkPerPage.pending), (state, action) => {
+        state.cars.isLoading = true;
       });
-
-    // .addMatcher(isAnyOf(getCarsThunk.fulfilled), (state, action) => {
-    //   state.cars.isLoading = false;
-    // })
-    // .addMatcher(isAnyOf(getCarsThunk.pending), (state, action) => {
-    //   state.cars.isLoading = true;
-    // });
   },
 });
 
