@@ -1,6 +1,6 @@
 # Прокат автомобілів в Україні
 
-Цей проект є веб-сайтом для прокату автомобілів в Україні. Сайт розроблено з
+Цей проект є тестовим веб-сайтом для прокату автомобілів в Україні. Сайт розроблено з
 використанням бібліотеки React і надає можливість користувачу вибирати з різних
 марок автомобілів і орендувати їх.
 
@@ -37,7 +37,7 @@ https://olga-olga.github.io/Rent-Car-In-Ukraine/
 
 # Car Rental in Ukraine
 
-This project is a website for car rental services in Ukraine. The website is
+This project is a test website for car rental services in Ukraine. The website is
 developed using the React library and allows users to choose from various car
 brands and rent them.
 
@@ -48,13 +48,18 @@ including photos and technical specifications. Simple car reservation process.
 
 # Technologies Used
 
-This project utilizes the following technologies: [React]: The core framework
-for user interface development. [React Router]: For route management and
-navigation. [Redux]: For state management. [Axios]: For making HTTP requests to
-the server. [Styled-components]: For component styling. [React-toastify]: For
-displaying notifications.
+This project utilizes the following technologies: 
+- [React](https://reactjs.org/): The core framework
+for user interface development.
+- [React Router](https://reactrouter.com/):  For route management and
+navigation.
+- [Redux](https://redux.js.org/): For state management.
+- [Axios](https://axios-http.com/): For making HTTP requests to the server.
+- [Styled-components](https://styled-components.com/): For component styling.
+- [React-toastify](https://fkhadra.github.io/react-toastify/introduction): For displaying notifications.
 
 Getting Started To run this project locally, visit the following link:
 https://olga-olga.github.io/Rent-Car-In-Ukraine/
 
-License This project is licensed under the MIT License. Created with ❤️.
+License This project is licensed under the MIT License. 
+Created with ❤️.
