@@ -15,6 +15,7 @@ export const StyledTitle = styled.h2`
 export const StyledFilterBlock = styled.form`
   display: flex;
   gap: 18px;
+  align-items: flex-end;
 `;
 
 export const StyledOl = styled.ol`
@@ -24,6 +25,7 @@ export const StyledOl = styled.ol`
   flex-shrink: 0;
   flex-wrap: wrap;
   justify-content: center;
+  max-width: 1400px;
 `;
 
 export const StyledItem = styled.li`
@@ -112,6 +114,33 @@ export const StyledLoadMoreBtn = styled.button`
   &:hover {
     background: #0b44cd;
   }
+`;
+
+export const StyledSearchBtn = styled.button`
+  padding: 14px;
+  border-radius: 10px;
+  background: ${({ theme }) => theme.colors.blue};
+  color: ${({ theme }) => theme.colors.lightWhite};
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.42;
+  border: 0;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 18px;
+  &:hover {
+    background: #0b44cd;
+  }
+`;
+
+export const StyledSelected = styled.select`
+  display: flex;
+  padding: 14px 89px 14px 18px;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  border-radius: 14px;
+  background: #f7f7fb;
 `;
 
 export const StyledLoadMoreLink = styled.button`

@@ -31,6 +31,9 @@ const carSlice = createSlice({
     incrementPage: (state, { payload }) => {
       state.currentPage += 1;
     },
+    setItems: (state, { payload }) => {
+      state.cars.items = payload;
+    },
     clearData: (state, { payload }) => {
       state.cars.items = [];
       state.currentPage = 1;
@@ -63,4 +66,5 @@ export const {
   removeFromFavoriteList,
   incrementPage,
   clearData,
+  setItems,
 } = carSlice.actions;

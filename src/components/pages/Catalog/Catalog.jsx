@@ -2,7 +2,7 @@ import { Modal } from 'components/Modal';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCarsThunkPerPage } from 'redux/car/carOperations';
-import { clearData, incrementPage } from 'redux/car/carSlice';
+import { clearData, incrementPage, setItems } from 'redux/car/carSlice';
 import {
   selectCars,
   selectCurrentPage,
@@ -16,6 +16,8 @@ import {
   StyledCarDescription,
   StyledCarModel,
   StyledDiv,
+  StyledDivLable,
+  StyledFilterBlock,
   StyledHart,
   StyledImg,
   StyledImgDiv,
@@ -23,18 +25,26 @@ import {
   StyledLoadMoreBtn,
   StyledLoadMoreLink,
   StyledOl,
+  StyledSearchBtn,
+  StyledSelect,
+  StyledSelected,
   StyledTitle,
   StyledTitleCard,
   StyledTitleFirstPart,
 } from './Catalog.styled';
 import { SpriteSVG } from 'components/assets/SpriteSVG';
+import { listOfUnique } from 'components/assets/helperMethods';
 
 const Catalog = () => {
   const dispatch = useDispatch();
   const [selectedCar, setSelectedCar] = useState(null);
   const currentPage = useSelector(selectCurrentPage);
-  const carList = useSelector(selectCars);
+  let carList = useSelector(selectCars);
   const totalPages = useSelector(selectTotalPages);
+  const [selectedBrand, setSelectedBrand] = useState('');
+  const [selectedPrice, setSelectedPrice] = useState('');
+  const [filteredCarList, setFilteredCarList] = useState(carList);
+
   const onPageUpload = () => {
     dispatch(incrementPage());
   };
@@ -69,9 +79,65 @@ const Catalog = () => {
     setSelectedCar(id);
   };
 
+  const onSubmitHandle = e => {
+    e.preventDefault();
+    const filteredCars = carList.filter(car => {
+      console.log(Number(car.rentalPrice.slice(1)));
+      if (
+        (!selectedBrand || car.make === selectedBrand) &&
+        (!selectedPrice || Number(car.rentalPrice.slice(1)) <= selectedPrice)
+      ) {
+        return true;
+      }
+      return false;
+    });
+
+    dispatch(setItems(filteredCars));
+  };
+
+  useEffect(() => {
+    setFilteredCarList(carList);
+  }, [carList]);
+
   return (
     <StyledDiv>
       <StyledTitle>Catalog here</StyledTitle>
+      <StyledFilterBlock onSubmit={onSubmitHandle}>
+        <StyledDivLable>
+          <div>Car brand</div>
+          <StyledSelected
+            placeholder="select the brand"
+            defaultValue=""
+            onChange={e => setSelectedBrand(e.target.value)}
+          >
+            <option value="" disabled>
+              Select the brand
+            </option>
+            {listOfUnique(useSelector(selectCars), 'make').map(make => {
+              return <option key={make}>{make}</option>;
+            })}
+          </StyledSelected>
+        </StyledDivLable>
+        <StyledDivLable>
+          <div>Price/ 1 hour</div>
+          <StyledSelected
+            placeholder="To $"
+            defaultValue=""
+            onChange={e => setSelectedPrice(e.target.value)}
+          >
+            <option value="" disabled>
+              To $
+            </option>
+            {listOfUnique(useSelector(selectCars), 'rentalPrice').map(price => {
+              return <option key={price}>{price}</option>;
+            })}
+          </StyledSelected>
+        </StyledDivLable>
+        <StyledDivLable>
+          <div> </div>
+          <StyledSearchBtn type="submit">Search</StyledSearchBtn>
+        </StyledDivLable>
+      </StyledFilterBlock>
       <StyledOl>
         {carList.map(car => {
           const firstLineStructure =
