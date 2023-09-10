@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getCarsThunkPerPage } from './carOperations';
+import { getCarsThunkPerPage, getThunkAllCars } from './carOperations';
 
 const carSlice = createSlice({
   name: 'cars',
@@ -8,10 +8,11 @@ const carSlice = createSlice({
       items: [],
       isLoading: false,
       error: null,
+      allList: [],
     },
-    filter: { field1: 0, field2: 0, field3: 0 },
     isOpenModal: false,
     favoriteList: [],
+    allCArList: [],
     currentPage: 1,
     itemsOnPage: 8,
     totalPages: 1,
@@ -49,6 +50,11 @@ const carSlice = createSlice({
         state.currentPage = action.payload.currentPage;
         state.itemsOnPage += action.payload.perPage;
         state.totalPages = action.payload.totalPages;
+      })
+      .addCase(getThunkAllCars.fulfilled, (state, action) => {
+        state.cars.allList = [];
+        const res = action.payload.flatMap(el => el.items);
+        state.cars.allList.push(...res);
       })
       .addMatcher(isAnyOf(getCarsThunkPerPage.fulfilled), (state, action) => {
         state.cars.isLoading = false;

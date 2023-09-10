@@ -33,3 +33,7 @@ export function listOfUnique(cars, field) {
     .map(car => car[field])
     .filter((value, index, arr) => arr.indexOf(value) === index);
 }
+
+export function uniqueCarts(items, field) {
+  return items.filter((value, index, arr) => arr.indexOf(value) === index);
+}

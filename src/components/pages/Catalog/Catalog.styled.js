@@ -4,8 +4,6 @@ export const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-left: 115px;
-  padding-right: 129px;
 `;
 
 export const StyledTitle = styled.h2`

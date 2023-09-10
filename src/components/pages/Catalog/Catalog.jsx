@@ -1,9 +1,10 @@
 import { Modal } from 'components/Modal';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCarsThunkPerPage } from 'redux/car/carOperations';
+import { getCarsThunkPerPage, getThunkAllCars } from 'redux/car/carOperations';
 import { clearData, incrementPage, setItems } from 'redux/car/carSlice';
 import {
+  selectAllList,
   selectCars,
   selectCurrentPage,
   selectFavorite,
@@ -32,13 +33,14 @@ import {
   StyledTitleFirstPart,
 } from './Catalog.styled';
 import { SpriteSVG } from 'components/assets/SpriteSVG';
-import { listOfUnique } from 'components/assets/helperMethods';
+import { listOfUnique, uniqueCarts } from 'components/assets/helperMethods';
 
 const Catalog = () => {
   const dispatch = useDispatch();
   const [selectedCar, setSelectedCar] = useState(null);
   const currentPage = useSelector(selectCurrentPage);
   let carList = useSelector(selectCars);
+  const allCars = useSelector(selectAllList);
   const totalPages = useSelector(selectTotalPages);
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedPrice, setSelectedPrice] = useState('');
@@ -51,6 +53,7 @@ const Catalog = () => {
 
   useEffect(() => {
     dispatch(getCarsThunkPerPage(currentPage));
+    dispatch(getThunkAllCars());
   }, [dispatch, currentPage]);
 
   useEffect(() => {
@@ -79,7 +82,7 @@ const Catalog = () => {
 
   const onSubmitHandle = e => {
     e.preventDefault();
-    const filteredCars = carList.filter(car => {
+    const filteredCars = allCars.filter(car => {
       if (
         (!selectedBrand || car.make === selectedBrand) &&
         (!selectedPrice || Number(car.rentalPrice.slice(1)) <= selectedPrice)
@@ -91,6 +94,8 @@ const Catalog = () => {
 
     dispatch(setItems(filteredCars));
   };
+
+  carList = uniqueCarts(carList, 'id');
 
   return (
     <StyledDiv>
@@ -106,7 +111,7 @@ const Catalog = () => {
             <option value="" disabled>
               Select the brand
             </option>
-            {listOfUnique(useSelector(selectCars), 'make').map(make => {
+            {listOfUnique(allCars, 'make').map(make => {
               return <option key={make}>{make}</option>;
             })}
           </StyledSelected>
@@ -121,14 +126,16 @@ const Catalog = () => {
             <option value="" disabled>
               To $
             </option>
-            {listOfUnique(useSelector(selectCars), 'rentalPrice').map(price => {
-              return <option key={price}>{price}</option>;
-            })}
+            {listOfUnique(useSelector(selectAllList), 'rentalPrice').map(
+              price => {
+                return <option key={price}>{price}</option>;
+              }
+            )}
           </StyledSelected>
         </StyledDivLable>
         <StyledDivLable>
           <div> </div>
-          <StyledSearchBtn type="submit">Search on the Page</StyledSearchBtn>
+          <StyledSearchBtn type="submit">Search</StyledSearchBtn>
         </StyledDivLable>
       </StyledFilterBlock>
       <StyledOl>

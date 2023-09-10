@@ -26,3 +26,25 @@ export const getCarsThunkPerPage = createAsyncThunk(
     }
   }
 );
+
+export const getThunkAllCars = createAsyncThunk(
+  'getThunkAllCars',
+  async (_, { rejectWithValue }) => {
+    Loading.standard();
+    try {
+      const { data } = await axios.get(`/advert`);
+      Loading.remove();
+
+      return data;
+    } catch (err) {
+      Loading.remove();
+      toast.error(
+        `Sorry, there is an error: ${err.message}. Try to come later.`,
+        {
+          position: toast.POSITION.TOP_CENTER,
+        }
+      );
+      return rejectWithValue(err.message);
+    }
+  }
+);

@@ -6,3 +6,4 @@ export const selectIsModalOpen = state => state.isOpenModal;
 export const selectItemOnPage = state => state.itemsOnPage;
 export const selectCurrentPage = state => state.currentPage;
 export const selectTotalPages = state => state.totalPages;
+export const selectAllList = state => state.cars.allList;
