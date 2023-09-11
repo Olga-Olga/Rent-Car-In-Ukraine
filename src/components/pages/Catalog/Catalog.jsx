@@ -45,6 +45,7 @@ const Catalog = () => {
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedPrice, setSelectedPrice] = useState('');
   const [searchPerformed, setSearchPerformed] = useState(false);
+  const [lengthCars, setLengthCars] = useState(1);
 
   const onPageUpload = () => {
     dispatch(incrementPage());
@@ -91,6 +92,7 @@ const Catalog = () => {
       return false;
     });
 
+    setLengthCars(filteredCars.length);
     dispatch(setItems(filteredCars));
     setSearchPerformed(true);
   };
@@ -148,58 +150,62 @@ const Catalog = () => {
         </StyledDivLable>
       </StyledFilterBlock>
       <StyledOl>
-        {carList.map(car => {
-          const firstLineStructure =
-            car.make.length + car.model.length < 13 && car.make.length < 6
-              ? true
-              : false;
-          return (
-            <StyledItem key={car.id}>
-              <StyledHart onClick={() => toggleFavoriteList(car)}>
-                {carsFavorite.some(item => car.id === item.id) ? (
-                  <Favorite>
-                    <SpriteSVG name="hart" />
-                  </Favorite>
-                ) : (
-                  <NotFavorite>
-                    <SpriteSVG name="hart" />
-                  </NotFavorite>
-                )}
-              </StyledHart>
-              <StyledImgDiv>
-                <StyledImg $imageUrl={car.img} alt={car.model} />
-              </StyledImgDiv>
-              <StyledTitleCard>
-                <StyledTitleFirstPart>
-                  {car.make}
-                  {firstLineStructure ? (
-                    <StyledCarModel> {car.model}</StyledCarModel>
-                  ) : null}
-                  , {car.year}
-                </StyledTitleFirstPart>
-                <div>{car.rentalPrice}</div>
-              </StyledTitleCard>
-              <StyledCarDescription>
-                {car.address.split(',')[1]} | {car.address.split(',')[2]} |{' '}
-                {car.rentalCompany.replace(`/\bPremium\b/gi`, '')}
-                {(
-                  car.address.split(',')[1] +
-                  car.address.split(',')[2] +
-                  car.rentalCompany
-                ).length < 37
-                  ? '| Premium'
-                  : null}
-              </StyledCarDescription>
-              <StyledCarDescription>
-                {car.type} | {car.model} | {car.id} |{' '}
-                {car.accessories[Math.floor(Math.random() * 3)]}
-              </StyledCarDescription>
-              <StyledLoadMoreBtn onClick={() => onOpenModal(car)}>
-                Learn More
-              </StyledLoadMoreBtn>
-            </StyledItem>
-          );
-        })}
+        {lengthCars ? (
+          carList.map(car => {
+            const firstLineStructure =
+              car.make.length + car.model.length < 13 && car.make.length < 6
+                ? true
+                : false;
+            return (
+              <StyledItem key={car.id}>
+                <StyledHart onClick={() => toggleFavoriteList(car)}>
+                  {carsFavorite.some(item => car.id === item.id) ? (
+                    <Favorite>
+                      <SpriteSVG name="hart" />
+                    </Favorite>
+                  ) : (
+                    <NotFavorite>
+                      <SpriteSVG name="hart" />
+                    </NotFavorite>
+                  )}
+                </StyledHart>
+                <StyledImgDiv>
+                  <StyledImg $imageUrl={car.img} alt={car.model} />
+                </StyledImgDiv>
+                <StyledTitleCard>
+                  <StyledTitleFirstPart>
+                    {car.make}
+                    {firstLineStructure ? (
+                      <StyledCarModel> {car.model}</StyledCarModel>
+                    ) : null}
+                    , {car.year}
+                  </StyledTitleFirstPart>
+                  <div>{car.rentalPrice}</div>
+                </StyledTitleCard>
+                <StyledCarDescription>
+                  {car.address.split(',')[1]} | {car.address.split(',')[2]} |{' '}
+                  {car.rentalCompany.replace(`/\bPremium\b/gi`, '')}
+                  {(
+                    car.address.split(',')[1] +
+                    car.address.split(',')[2] +
+                    car.rentalCompany
+                  ).length < 37
+                    ? '| Premium'
+                    : null}
+                </StyledCarDescription>
+                <StyledCarDescription>
+                  {car.type} | {car.model} | {car.id} |{' '}
+                  {car.accessories[Math.floor(Math.random() * 3)]}
+                </StyledCarDescription>
+                <StyledLoadMoreBtn onClick={() => onOpenModal(car)}>
+                  Learn More
+                </StyledLoadMoreBtn>
+              </StyledItem>
+            );
+          })
+        ) : (
+          <div>No cars found</div>
+        )}
       </StyledOl>
       {!searchPerformed && currentPage < totalPages ? (
         <StyledLoadMoreLink onClick={onPageUpload}>
