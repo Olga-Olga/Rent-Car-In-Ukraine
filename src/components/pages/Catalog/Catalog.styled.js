@@ -111,6 +111,7 @@ export const StyledLoadMoreBtn = styled.button`
   margin-top: 28px;
   &:hover {
     background: #0b44cd;
+    cursor: pointer;
   }
 `;
 
@@ -128,6 +129,7 @@ export const StyledSearchBtn = styled.button`
   gap: 18px;
   &:hover {
     background: #0b44cd;
+    cursor: pointer;
   }
 `;
 
@@ -151,9 +153,9 @@ export const StyledLoadMoreLink = styled.button`
   background-color: white;
   padding-top: 100px;
   padding-bottom: 150px;
-
   &:hover {
     color: #0b44cd;
+    cursor: pointer;
   }
 `;
 
