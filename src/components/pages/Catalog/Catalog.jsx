@@ -33,7 +33,7 @@ import {
   StyledTitleFirstPart,
 } from './Catalog.styled';
 import { SpriteSVG } from 'components/assets/SpriteSVG';
-import { listOfUnique, uniqueCarts } from 'components/assets/helperMethods';
+import { listOfUnique } from 'components/assets/helperMethods';
 
 const Catalog = () => {
   const dispatch = useDispatch();
@@ -95,6 +95,11 @@ const Catalog = () => {
     setSearchPerformed(true);
   };
 
+  const onResetFilters = () => {
+    dispatch(clearData());
+    window.location.reload();
+  };
+
   return (
     <StyledDiv>
       <StyledTitle>Catalog here</StyledTitle>
@@ -135,9 +140,15 @@ const Catalog = () => {
           <div> </div>
           <StyledSearchBtn type="submit">Search</StyledSearchBtn>
         </StyledDivLable>
+        <StyledDivLable>
+          <div> </div>
+          <StyledSearchBtn type="reset" onClick={onResetFilters}>
+            Reset
+          </StyledSearchBtn>
+        </StyledDivLable>
       </StyledFilterBlock>
       <StyledOl>
-        {uniqueCarts(carList, 'id').map(car => {
+        {carList.map(car => {
           const firstLineStructure =
             car.make.length + car.model.length < 13 && car.make.length < 6
               ? true
