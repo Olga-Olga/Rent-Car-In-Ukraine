@@ -46,7 +46,7 @@ brands and rent them.
 Selection of various car makes and models. Detailed information about each car,
 including photos and technical specifications. Simple car reservation process.
 
-# Technologies Used
+## Technologies Used
 
 This project utilizes the following technologies: 
 - [React](https://reactjs.org/): The core framework
